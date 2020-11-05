@@ -23,6 +23,8 @@ const FileTable = ({ data }) => {
     setRowkeys({ ...rowkeys, selectedRowKeys });
   };
 
+  const hasSelected = rowkeys.selectedRowKeys.length > 0;
+
   const rowSelection = {
     selectedRowkeys: rowkeys.selectedRowKeys,
     onChange: onSelectChange,
@@ -48,7 +50,24 @@ const FileTable = ({ data }) => {
   ];
 
   return (
-    <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    <div>
+      <div style={{ marginBottom: 16 }}>
+        <Button
+          type="primary"
+          onClick={start}
+          disabled={!hasSelected}
+          loading={rowkeys.loading}
+        >
+          Download
+        </Button>
+        <span style={{ marginLeft: 8 }}>
+          {hasSelected
+            ? `Selected ${rowkeys.selectedRowKeys.length} items`
+            : ""}
+        </span>
+      </div>
+      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+    </div>
   );
 };
 
