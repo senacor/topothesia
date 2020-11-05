@@ -1,6 +1,11 @@
 import json
 
-# import requests
+import requests
+from urllib.parse import unquote_plus
+import os
+import boto3
+
+s3 = boto3.client('s3')
 
 
 def lambda_handler(event, context):
@@ -33,6 +38,18 @@ def lambda_handler(event, context):
 
     #     raise e
 
+    print(event)
+    print(os.getcwd())
+    for record in event['Records']:
+        bucket = record['s3']['bucket']['name']
+        key = unquote_plus(record['s3']['object']['key'])
+        tmp_key = key.replace('/', '')
+        download_path = '/tmp/{}'.format(tmp_key)
+        print(download_path)
+        s3.download_file(bucket, key, download_path)
+        files = {'file': open(download_path, 'rb')}
+        r = requests.post('http://localhost:8080', files=files)
+        print(r.text)
     return {
         "statusCode": 200,
         "body": json.dumps({
