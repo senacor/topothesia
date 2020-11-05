@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { Input } from "antd";
 import { useState } from "react";
+import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 
 import FileTable from "./components/FileTable";
 
@@ -38,6 +39,7 @@ function App() {
 
   return (
     <div className="App">
+      <AmplifySignOut />
       <Search
         placeholder="input search text"
         allowClear
@@ -50,4 +52,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
