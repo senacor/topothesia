@@ -1,0 +1,45 @@
+service: topothesia-document-selection
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: eu-central-1
+  deploymentBucket:
+    name: topothesia-dev
+    serverSideEncryption: AES256
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  search:
+    handler: bin/search
+    events:
+      - http:
+          path: /document
+          method: get
