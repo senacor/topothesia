@@ -1,12 +1,12 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { Input, Button} from "antd";
-import { useState } from "react";
-import { withAuthenticator, AmplifySignOut } from "@aws-amplify/ui-react";
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Input } from 'antd';
+import { useState } from 'react';
+import './App.css';
+
+import FileTable from './components/FileTable';
 
 import FileUpload from './components/FileUpload';
 
-import FileTable from "./components/FileTable";
 const { Search } = Input;
 
 const onSearch = (value) => {
@@ -40,9 +40,6 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{ marginBottom: 16, width: 100 }}>
-        <AmplifySignOut />
-      </div>
       <FileUpload />
       <Search
         placeholder="input search text"
