@@ -1,0 +1,4 @@
+- name: returns an array with the entries matching the request
+  endpoint: {function: search}
+  response:
+    body: '{"1": "Happy hacking with test", "2": "Another document test"}'
