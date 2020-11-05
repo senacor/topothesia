@@ -43,3 +43,9 @@ functions:
       - http:
           path: /document
           method: get
+  select:
+    handler: bin/select
+    events:
+      - http:
+          path: /document/{documentId}
+          method: get
