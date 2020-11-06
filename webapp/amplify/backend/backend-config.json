@@ -7,5 +7,11 @@
       "customAuth": false
     }
   },
-  "hosting": {}
+  "hosting": {
+    "amplifyhosting": {
+      "service": "amplifyhosting",
+      "type": "cicd",
+      "lastPushTimeStamp": "2020-11-06T08:53:23.802Z"
+    }
+  }
 }
