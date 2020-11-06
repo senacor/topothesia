@@ -1,42 +1,50 @@
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import { Input } from 'antd';
-import { useState } from 'react';
-import './App.css';
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Input } from "antd";
+import { useState } from "react";
+import "./App.css";
+import axios from "axios";
 
-import FileTable from './components/FileTable';
+import FileTable from "./components/FileTable";
 
-import FileUpload from './components/FileUpload';
+import FileUpload from "./components/FileUpload";
 
 const { Search } = Input;
 
-const onSearch = (value) => {
-  console.log(value);
-};
-
 function App() {
-  const [files, setFiles] = useState([
-    {
-      key: 1,
-      title: "Test Document",
-      filename: "test_document.pdf",
-      author: "Test Author",
-      pages: 254,
-    },
-    {
-      key: 2,
-      title: "Example Doc",
-      filename: "examp_doc.pdf",
-      author: "Examp Author",
-      pages: 45,
-    },
-    {
-      key: 3,
-      title: "Test File",
-      filename: "test_file.pdf",
-      author: "Some Author",
-      pages: 132,
-    },
-  ]);
+  const [files, setFiles] = useState([]);
+
+  const onLoad = (value) => {
+    axios
+      .get(
+        `https://search-topothesia-xgm2eh7g25z5qqkjpvlfmzqjve.eu-central-1.es.amazonaws.com/documents/_search?pretty=&size=20`
+      )
+      .then((res) => {
+        let arr = [];
+        let hits = res.data.hits.hits;
+
+        for (let i = 0; i < hits.length; i++) {
+          arr = [
+            ...arr,
+            {
+              key: hits[i]._id,
+              title: hits[i]._source.title,
+              filename: hits[i]._source.filename,
+              author: hits[i]._source.author,
+              created: hits[i]._source.created,
+              pages: hits[i]._source.numberOfPages,
+            },
+          ];
+        }
+
+        setFiles(arr);
+      });
+  };
+
+  const onSearch = () => {
+    
+  }
+
+  onLoad();
 
   return (
     <div className="App">
@@ -46,7 +54,7 @@ function App() {
         allowClear
         enterButton="Search"
         size="large"
-        onSearch={onSearch}
+        onSearch={() => onSearch()}
         style={{ marginBottom: 16 }}
       />
       <FileTable data={files} />
