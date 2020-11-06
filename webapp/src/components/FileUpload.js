@@ -9,7 +9,7 @@ function FileUpload() {
     visible: false,
   });
 
-  const showDragger = () => {
+  const toggleDragger = () => {
     setDragger({
       visible: !dragger.visible,
     });
@@ -35,7 +35,7 @@ function FileUpload() {
     <div>
       <Button
         type="primary"
-        onClick={() => showDragger()}
+        onClick={() => toggleDragger()}
         style={{ marginBottom: 16 }}
       >
         Upload
