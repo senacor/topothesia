@@ -36,6 +36,11 @@ sam deploy --guided
 
 The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
 
+Alternatively:
+```
+sam deploy --stack-name topothesia-hello-world-lamda-py --s3-bucket topothesia-dev --capabilities CAPABILITY_IAM
+```
+
 * **Stack Name**: The name of the stack to deploy to CloudFormation. This should be unique to your account and region, and a good starting point would be something matching your project name.
 * **AWS Region**: The AWS region you want to deploy your app to.
 * **Confirm changes before deploy**: If set to yes, any change sets will be shown to you before execution for manual review. If set to no, the AWS SAM CLI will automatically deploy application changes.

@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.senacor"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.3-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+	implementation("org.apache.tika:tika-parsers:1.24")
+	implementation("org.jsoup:jsoup:1.13.1")
 	implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

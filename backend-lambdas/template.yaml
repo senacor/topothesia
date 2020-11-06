@@ -9,6 +9,9 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+    Environment:
+      Variables:
+        ES_URL: http://topothesiacurator-env.eba-ryyjga2w.eu-central-1.elasticbeanstalk.com/
 
 Resources:
   UploadBucket:

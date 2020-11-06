@@ -9,17 +9,13 @@ import org.springframework.web.multipart.MultipartFile
 import java.io.File
 
 @RestController
-class HelloWorldController {
-
-    @GetMapping("/")
-    fun helloWorld(): String {
-        return "Hello World"
-    }
+class Controller(val tikaWrapper: TikaWrapper, val repository: ProcessedDocumentsRepository) {
 
     @PostMapping("/")
     fun uploadHelloWorld(@RequestParam("file") file: MultipartFile): String {
-        println(file.originalFilename)
-        println(file.contentType)
+        val document = tikaWrapper.parse(file.originalFilename, file.inputStream)
+        print(document)
+        repository.save(document)
         return file.name
     }
 }
