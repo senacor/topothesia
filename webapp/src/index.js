@@ -14,7 +14,6 @@ Amplify.configure(awsconfig);
 
 // You can get the current config object
 const currentConfig = Auth.configure();
-
 const { Header, Content, Footer } = Layout;
 
 ReactDOM.render(
