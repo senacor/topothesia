@@ -1,6 +1,6 @@
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Input } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 
@@ -40,9 +40,11 @@ function App() {
       });
   };
 
-  const onSearch = () => {};
+  useEffect(() => {
+    onLoad();
+  }, []);
 
-  onLoad();
+  const onSearch = () => {};
 
   return (
     <div className="App" data-testid="app">
