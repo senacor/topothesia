@@ -32,7 +32,7 @@ function FileUpload() {
     },
   };
   return (
-    <div>
+    <div data-testid="fileupload">
       <Button
         type="primary"
         onClick={() => toggleDragger()}
