@@ -50,7 +50,7 @@ const FileTable = ({ data }) => {
   ];
 
   return (
-    <div>
+    <div data-testid="filetable">
       <div style={{ marginBottom: 16 }}>
         <Button
           type="primary"
