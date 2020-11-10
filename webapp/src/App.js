@@ -4,9 +4,9 @@ import { useState } from "react";
 import "./App.css";
 import axios from "axios";
 
-import FileTable from "./components/FileTable";
+import FileTable from "./components/FileTable/FileTable";
 
-import FileUpload from "./components/FileUpload";
+import FileUpload from "./components/FileUpload/FileUpload";
 
 const { Search } = Input;
 
@@ -40,14 +40,12 @@ function App() {
       });
   };
 
-  const onSearch = () => {
-    
-  }
+  const onSearch = () => {};
 
   onLoad();
 
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <FileUpload />
       <Search
         placeholder="input search text"
