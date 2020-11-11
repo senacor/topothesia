@@ -14,3 +14,10 @@ test("renders fileupload correctly", () => {
   const { getByTestId } = render(<FileUpload />, div);
   expect(getByTestId("fileupload").textContent).toBe("Upload");
 });
+
+test("renders fileupload-uploadbutton correctly", () => {
+  const div = document.createElement("div");
+  const { getByTestId } = render(<FileUpload />, div);
+  
+  expect(getByTestId("fileuploadUploadButton")).toBeTruthy();
+});

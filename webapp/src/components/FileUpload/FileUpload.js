@@ -34,6 +34,7 @@ function FileUpload() {
   return (
     <div data-testid="fileupload">
       <Button
+        data-testid="fileuploadUploadButton"
         type="primary"
         onClick={() => toggleDragger()}
         style={{ marginBottom: 16 }}
