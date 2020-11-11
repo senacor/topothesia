@@ -4,6 +4,8 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import FileTable from "../FileTable";
 
+const testEmpty = [ ];
+
 const testData = [
   {
     key: 1,
@@ -39,4 +41,18 @@ test("renders filetable correctly", () => {
   //const res = screen.findAllByTestId('filetable');
   //expect(res.toHaveTextContent(testData[0].title));
   expect(getByTestId("filetable").textContent).toContain(testData[0].title);
+});
+
+test("renders filetable-downloadbutton correctly", () => {
+  const div = document.createElement("div");
+  const { getByTestId } = render(<FileTable data={testData} />, div);
+  
+  expect(getByTestId("filetableDownloadButton")).toBeTruthy();
+});
+
+test("renders filetable-table correctly", () => {
+  const div = document.createElement("div");
+  const { getByTestId } = render(<FileTable data={testData} />, div);
+  
+  expect(getByTestId("filetableTable")).toBeTruthy();
 });

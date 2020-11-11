@@ -53,6 +53,7 @@ const FileTable = ({ data }) => {
     <div data-testid="filetable">
       <div style={{ marginBottom: 16 }}>
         <Button
+          data-testid="filetableDownloadButton"
           type="primary"
           onClick={start}
           disabled={!hasSelected}
@@ -66,7 +67,7 @@ const FileTable = ({ data }) => {
             : ""}
         </span>
       </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />
+      <Table data-testid="filetableTable" rowSelection={rowSelection} columns={columns} dataSource={data} />
     </div>
   );
 };
