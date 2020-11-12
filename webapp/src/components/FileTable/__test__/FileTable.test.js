@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, getByTestId, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import FileTable from "../FileTable";
 
-const testEmpty = [ ];
+const testEmpty = [];
 
 const testData = [
   {
@@ -46,13 +46,34 @@ test("renders filetable correctly", () => {
 test("renders filetable-downloadbutton correctly", () => {
   const div = document.createElement("div");
   const { getByTestId } = render(<FileTable data={testData} />, div);
-  
+
   expect(getByTestId("filetableDownloadButton")).toBeTruthy();
 });
 
 test("renders filetable-table correctly", () => {
   const div = document.createElement("div");
   const { getByTestId } = render(<FileTable data={testData} />, div);
-  
+
   expect(getByTestId("filetableTable")).toBeTruthy();
+});
+
+test("check all files activates download", () => {
+  const div = document.createElement("div");
+  const { container, getAllByTestId } = render(<FileTable data={testData} />, div);
+
+  //get the check all checkbox
+  const checkboxCheckAll = container.querySelector('input[type="checkbox"].ant-checkbox-input');
+  //get the download button
+  const buttonDownload = getByTestId(container, 'filetableDownloadButton');
+  
+  expect(checkboxCheckAll).toBeInTheDocument();
+  expect(checkboxCheckAll).not.toBeChecked();
+  expect(buttonDownload).toHaveAttribute('disabled');
+
+  //click the select all checkbox
+  const leftClick = { button: 1 };
+  fireEvent.click(checkboxCheckAll, leftClick);
+
+  expect(checkboxCheckAll).toBeChecked();
+  expect(buttonDownload).not.toHaveAttribute('disabled');
 });
